@@ -1,0 +1,69 @@
+# If you want to install application is subfolder - add folder name after RewriteBase (line 4). Example:
+# RewriteBase /folder_name/
+
+RewriteBase /
+ErrorDocument 404 /core/pages/error.php
+
+
+# Uncomment (remove #) next 2 lines if you using https connection:
+#RewriteCond %{HTTPS} off
+#RewriteRule .* https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Uncomment (remove #) next 2 lines if you want to use website with www prefix:
+#RewriteCond %{HTTP_HOST} !^www\.
+#RewriteRule .* https://www.%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Uncomment (remove #) next 2 lines if you want to use website wihout www prefix:
+#RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+#RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+
+
+RewriteEngine On
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.php -f
+
+RewriteRule ^site/install 							./install/index.php
+RewriteRule ^site/install 							./install/index.php
+RewriteRule ^site/confirm/(.*)$						./core/pages/ajax.php?cmd=confirm&code=$1
+RewriteRule ^site/points 							./core/pages/points.php
+RewriteRule ^site/terms 							./core/pages/terms.php
+RewriteRule ^site/contact 							./core/pages/contact.php
+RewriteRule ^site/privacy 							./core/pages/privacy.php
+RewriteRule ^site/people 							./core/pages/people.php
+RewriteRule ^site/search 							./core/pages/search.php
+RewriteRule ^site/notifications/system	 			./core/pages/notifications.php?type=5
+RewriteRule ^site/notifications/mentions 			./core/pages/notifications.php?type=4
+RewriteRule ^site/notifications/followers 			./core/pages/notifications.php?type=3
+RewriteRule ^site/notifications/answers 			./core/pages/notifications.php?type=2
+RewriteRule ^site/notifications/upvotes 			./core/pages/notifications.php?type=1
+RewriteRule ^site/notifications 					./core/pages/notifications.php?type=10
+RewriteRule ^site/notification 						./core/pages/account_notification.php
+RewriteRule ^site/signup 							./core/pages/signup.php
+RewriteRule ^site/login 							./core/pages/login.php
+RewriteRule ^site/about 							./core/pages/about.php
+RewriteRule ^site/forgotpassword 					./core/pages/forgotpassword.php
+RewriteRule ^site/settings 							./core/pages/account_settings.php
+RewriteRule ^site/profile 							./core/pages/account_profile.php
+RewriteRule ^site/disable 							./core/pages/account_disable.php
+RewriteRule ^site/topics 							./core/pages/categories.php
+RewriteRule ^site/captcha 							./core/modules/captcha.php
+RewriteRule ^site/error 							./core/pages/error.php
+RewriteRule ^site/answer 							./core/pages/stream.php?type=0&page=answer
+RewriteRule ^site/stream/aswered 					./core/pages/stream.php?type=1
+RewriteRule ^site/stream/followed 					./core/pages/stream.php?type=3
+RewriteRule ^site/stream/unaswered 					./core/pages/stream.php?type=0
+RewriteRule ^site/stream/popular 					./core/pages/stream.php?type=2
+RewriteRule ^site/stream 							./core/pages/stream.php?type=4
+RewriteRule ^site/logout 							./core/pages/logout.php
+RewriteRule ^site/auth 								./core/modules/auth.php	
+
+RewriteRule ^ajax/(.*)$ 							./core/pages/ajax.php?cmd=$1
+
+RewriteRule ^([A-Za-z0-9_-]+)$ 						./core/pages/profile.php?user_profile=$1
+RewriteRule ^([A-Za-z0-9_-]+)/questions 			./core/pages/questions.php?user_profile=$1
+RewriteRule ^([A-Za-z0-9_-]+)/points 				./core/pages/account_points.php?user_profile=$1
+RewriteRule ^([A-Za-z0-9_-]+)/answers 				./core/pages/answers.php?user_profile=$1
+RewriteRule ^q/(.*)$ 								./core/pages/question.php?url=$1
+RewriteRule ^deletec/(.*)$ 							./core/pages/ajax.php?cmd=delete_c&del_id=$1 [QSA]
+RewriteRule ^delete/(.*)$ 							./core/pages/ajax.php?cmd=delete_qa&del_id=$1 [QSA]
+RewriteRule ^category/(.*)$ 						./core/pages/category.php?url=$1
